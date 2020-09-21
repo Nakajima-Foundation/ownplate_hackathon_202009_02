@@ -97,39 +97,22 @@
           サポートを閉じる
         </div>
         <div class="line-bc">
-          <!--②左コメント始-->
-          <supporter-message :message="'aaa'"></supporter-message>
-          <!--②/左コメント終-->
-
-          <!--③右コメント始-->
-          <div class="mycomment">
-            <p>
-              右ふきだし文
-            </p>
-          </div>
-          <!--/③右コメント終-->
-        </div>
-        <!--/①LINE会話終了-->
-
-        <div
-          class="bg-surface r-8 d-low m-t-8 p-b-24"
-          style="height: 550px; border: 2px solid rgba(0, 0, 0, 0.2); overflow: scroll;"
-        >
           <div
-            class="box"
-            v-bind:class="supportMessage.role"
-            v-for="supportMessage in this.supportMessages"
+            v-for="supportMessage in supportMessages"
             :key="supportMessage.message"
           >
             <supporter-message
               v-if="supportMessage.role == 'supporter'"
-              :message="'aaa'"
+              :message="supportMessage.message"
             ></supporter-message>
-            <div v-if="supportMessage.role == 'shop'">
-              {{ supportMessage.message }}
+            <div v-if="supportMessage.role == 'shop'" class="mycomment">
+              <p>
+                {{ supportMessage.message }}
+              </p>
             </div>
           </div>
         </div>
+
         <div>画面: {{ this.supportFrom }}</div>
         <b-field label="メッセージ">
           <b-input
@@ -139,7 +122,7 @@
           ></b-input>
         </b-field>
 
-        <button @click="setSupportMessage">投稿</button>
+        <b-button type="is-success" @click="setSupportMessage">送信</b-button>
       </div>
     </b-sidebar>
 
@@ -586,6 +569,7 @@ export default {
   text-align: right;
   font-size: 14px;
   background: #7da4cd;
+  min-height: 600px;
 }
 
 /*以下、②左側のコメント*/
