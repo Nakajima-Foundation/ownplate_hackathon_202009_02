@@ -96,6 +96,21 @@
         <div class="op-button-small tertiary" @click="supportClose()">
           サポートを閉じる
         </div>
+        <div class="line-bc">
+          <!--②左コメント始-->
+          <supporter-message :message="'aaa'"></supporter-message>
+          <!--②/左コメント終-->
+
+          <!--③右コメント始-->
+          <div class="mycomment">
+            <p>
+              右ふきだし文
+            </p>
+          </div>
+          <!--/③右コメント終-->
+        </div>
+        <!--/①LINE会話終了-->
+
         <div
           class="bg-surface r-8 d-low m-t-8 p-b-24"
           style="height: 550px; border: 2px solid rgba(0, 0, 0, 0.2); overflow: scroll;"
@@ -106,7 +121,13 @@
             v-for="supportMessage in this.supportMessages"
             :key="supportMessage.message"
           >
-            {{ supportMessage.message }}
+            <supporter-message
+              v-if="supportMessage.role == 'supporter'"
+              :message="'aaa'"
+            ></supporter-message>
+            <div v-if="supportMessage.role == 'shop'">
+              {{ supportMessage.message }}
+            </div>
           </div>
         </div>
         <div>画面: {{ this.supportFrom }}</div>
@@ -206,13 +227,15 @@
 import { db, auth, functions, analytics } from "@/plugins/firebase.js";
 import { releaseConfig } from "~/plugins/config.js";
 import DialogBox from "~/components/DialogBox";
+import SupporterMessage from "~/components/SupporterMessage";
 import AudioPlay from "./AudioPlay";
 import * as Sentry from "@sentry/browser";
 
 export default {
   components: {
     DialogBox,
-    AudioPlay
+    AudioPlay,
+    SupporterMessage
   },
   data() {
     return {
@@ -553,5 +576,89 @@ export default {
   padding: 8px 8px 8px 2px;
   background-color: darkseagreen;
   text-align: left;
+}
+
+/*以下、①背景色など*/
+.line-bc {
+  padding: 20px 10px;
+  max-width: 450px;
+  margin: 15px auto;
+  text-align: right;
+  font-size: 14px;
+  background: #7da4cd;
+}
+
+/*以下、②左側のコメント*/
+.balloon6 {
+  width: 100%;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.balloon6 .faceicon {
+  float: left;
+  margin-right: -50px;
+  width: 40px;
+}
+
+.balloon6 .faceicon img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+.balloon6 .chatting {
+  width: 100%;
+  text-align: left;
+}
+.says {
+  display: inline-block;
+  position: relative;
+  margin: 0 0 0 50px;
+  padding: 10px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: #edf1ee;
+}
+
+.says:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #edf1ee;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+.says p {
+  margin: 0;
+  padding: 0;
+}
+
+/*以下、③右側の緑コメント*/
+.mycomment {
+  margin: 10px 0;
+}
+.mycomment p {
+  display: inline-block;
+  position: relative;
+  margin: 0 10px 0 0;
+  padding: 8px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: #30e852;
+  font-size: 15px;
+}
+
+.mycomment p:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: -19px;
+  border: 8px solid transparent;
+  border-left: 18px solid #30e852;
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
 }
 </style>
