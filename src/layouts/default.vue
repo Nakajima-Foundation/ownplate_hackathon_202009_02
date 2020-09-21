@@ -41,38 +41,45 @@
       <!-- Home -->
       <div class="align-center m-t-24">
         <router-link to="/">
-          <div class="op-button-medium tertiary w-192" @click="handleClose()">{{ $t("menu.home") }}</div>
+          <div class="op-button-medium tertiary w-192" @click="handleClose()">
+            {{ $t("menu.home") }}
+          </div>
         </router-link>
       </div>
 
       <!-- Profile -->
       <div class="align-center m-t-24">
         <router-link to="/u/profile">
-          <div class="op-button-small tertiary" @click="handleClose()">{{ $t("profile.title") }}</div>
+          <div class="op-button-small tertiary" @click="handleClose()">
+            {{ $t("profile.title") }}
+          </div>
         </router-link>
       </div>
 
       <!-- Terms for Restaurant -->
       <div class="align-center m-t-24">
         <router-link to="/terms/admin" target="_blank">
-          <div
-            class="op-button-text t-button"
-            @click="handleClose()"
-          >{{ $t("menu.termsRestaurant") }}</div>
+          <div class="op-button-text t-button" @click="handleClose()">
+            {{ $t("menu.termsRestaurant") }}
+          </div>
         </router-link>
       </div>
 
       <!-- Terms for User -->
       <div class="align-center">
         <router-link to="/terms/user" target="_blank">
-          <div class="op-button-text t-button" @click="handleClose()">{{ $t("menu.termsUser") }}</div>
+          <div class="op-button-text t-button" @click="handleClose()">
+            {{ $t("menu.termsUser") }}
+          </div>
         </router-link>
       </div>
 
       <!-- Privacy -->
       <div class="align-center">
         <router-link to="/privacy" target="_blank">
-          <div class="op-button-text t-button" @click="handleClose()">{{ $t("menu.privacy") }}</div>
+          <div class="op-button-text t-button" @click="handleClose()">
+            {{ $t("menu.privacy") }}
+          </div>
         </router-link>
       </div>
     </b-sidebar>
@@ -86,20 +93,29 @@
       :open.sync="this.supportOn"
     >
       <div class="m-l-8 m-r-8 align-center">
-        <div class="op-button-small tertiary" @click="supportClose()">サポートを閉じる</div>
+        <div class="op-button-small tertiary" @click="supportClose()">
+          サポートを閉じる
+        </div>
         <div
           class="bg-surface r-8 d-low m-t-8 p-b-24"
           style="height: 550px; border: 2px solid rgba(0, 0, 0, 0.2); overflow: scroll;"
         >
           <div
-            class="m-t-16"
+            class="box"
+            v-bind:class="supportMessage.role"
             v-for="supportMessage in this.supportMessages"
-            :key="supportMessage"
-          >{{ supportMessage }}</div>
+            :key="supportMessage.message"
+          >
+            {{ supportMessage.message }}
+          </div>
         </div>
         <div>画面: {{ this.supportFrom }}</div>
         <b-field label="メッセージ">
-          <b-input v-model="supportInput" maxlength="200" type="textarea"></b-input>
+          <b-input
+            v-model="supportInput"
+            maxlength="200"
+            type="textarea"
+          ></b-input>
         </b-field>
 
         <button @click="setSupportMessage">投稿</button>
@@ -109,7 +125,9 @@
     <!-- Main -->
     <div class="main">
       <div class="contents">
-        <div v-if="underConstruction" class="underConstruction">{{ $t("underConstruction") }}</div>
+        <div v-if="underConstruction" class="underConstruction">
+          {{ $t("underConstruction") }}
+        </div>
 
         <!-- approproate component under pages will be displayed -->
         <nuxt v-if="isReadyToRender"></nuxt>
@@ -118,7 +136,12 @@
     </div>
 
     <!-- Loading -->
-    <b-loading v-if="isLoading" :is-full-page="true" :active="true" :can-cancel="false"></b-loading>
+    <b-loading
+      v-if="isLoading"
+      :is-full-page="true"
+      :active="true"
+      :can-cancel="false"
+    ></b-loading>
 
     <!-- Footer -->
     <div class="m-t-48">
@@ -126,12 +149,19 @@
         <div class="flex-1">
           <div
             class="is-inline-block t-caption c-text-white-medium m-t-16 m-l-16"
-          >Operated by Singularity Society</div>
+          >
+            Operated by Singularity Society
+          </div>
         </div>
         <div class="align-right">
-          <div class="op-button-pill bg-sattle-white m-r-16 m-t-16" @click="openLang()">
+          <div
+            class="op-button-pill bg-sattle-white m-r-16 m-t-16"
+            @click="openLang()"
+          >
             <i class="material-icons c-text-white-high">language</i>
-            <span class="c-text-white-high t-button">{{ languages[language] }}</span>
+            <span class="c-text-white-high t-button">{{
+              languages[language]
+            }}</span>
             <i class="material-icons c-text-white-high">arrow_drop_down</i>
           </div>
         </div>
@@ -141,15 +171,30 @@
     <!-- Language Popup-->
     <b-modal :active.sync="langPopup" :width="488" scroll="keep">
       <div class="op-dialog p-t-24 p-l-24 p-r-24 p-b-24">
-        <div class="t-h6 c-text-black-disabled p-b-8">{{ $t("menu.selectLanguage") }}</div>
-        <div class="m-t-16" v-for="(lang, lang_key) in languages" :key="lang_key">
-          <div class="op-button-pill bg-form" @click="changeLangAndClose(lang_key)">
-            <i class="material-icons c-text-black-high" v-if="lang_key == language">check</i>
+        <div class="t-h6 c-text-black-disabled p-b-8">
+          {{ $t("menu.selectLanguage") }}
+        </div>
+        <div
+          class="m-t-16"
+          v-for="(lang, lang_key) in languages"
+          :key="lang_key"
+        >
+          <div
+            class="op-button-pill bg-form"
+            @click="changeLangAndClose(lang_key)"
+          >
+            <i
+              class="material-icons c-text-black-high"
+              v-if="lang_key == language"
+              >check</i
+            >
             <span class="t-button">{{ lang }}</span>
           </div>
         </div>
         <div class="m-t-24 align-center">
-          <div class="op-button-small tertiary" @click="closeLang()">{{ $t("menu.close") }}</div>
+          <div class="op-button-small tertiary" @click="closeLang()">
+            {{ $t("menu.close") }}
+          </div>
         </div>
       </div>
     </b-modal>
@@ -171,6 +216,7 @@ export default {
   },
   data() {
     return {
+      isSupporter: true,
       language: "en",
       languages: [],
       items: [
@@ -494,5 +540,18 @@ export default {
   background: yellow;
   @extend .p-t-4;
   @extend .p-b-4;
+}
+
+.shop {
+  margin: 10px 0px 0px 15px;
+  background-color: rgba(0, 0, 0, 0.05);
+  text-align: left;
+  padding: 8px 2px 8px 8px;
+}
+.supporter {
+  margin: 15px 10px 0px 0px;
+  padding: 8px 8px 8px 2px;
+  background-color: darkseagreen;
+  text-align: left;
 }
 </style>
