@@ -102,7 +102,7 @@
           <b-input v-model="supportInput" maxlength="200" type="textarea"></b-input>
         </b-field>
 
-        <button>投稿</button>
+        <button @click="setSupportMessage">投稿</button>
       </div>
     </b-sidebar>
 
@@ -331,6 +331,11 @@ export default {
         // save into store
         this.$store.commit("setLang", lang);
       }
+    },
+    async setSupportMessage() {
+      // await this.$store.commit("setSupportMessage", this.supportInput);
+      await this.$store.commit("setDummySupportMessage", this.supportInput);
+      this.supportInput = "";
     }
   },
   beforeCreate() {
