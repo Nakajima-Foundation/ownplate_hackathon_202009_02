@@ -77,6 +77,20 @@
       </div>
     </b-sidebar>
 
+    <!-- support box -->
+    <b-sidebar
+      type="is-light"
+      :fullheight="fullheight"
+      :fullwidth="fullwidth"
+      :right="right"
+      :open.sync="this.supportOn"
+    >
+      <div class="op-button-small tertiary" @click="supportClose()">サポートを閉じる</div>
+      <div>display</div>
+      <div>input</div>
+      <button>投稿</button>
+    </b-sidebar>
+
     <!-- Main -->
     <div class="main">
       <div class="contents">
@@ -231,6 +245,9 @@ export default {
     profile_path() {
       const path_prefix = this.isAdmin ? "admins" : "users";
       return `${path_prefix}/${this.uid}/private/profile`;
+    },
+    supportOn() {
+      return this.$store.getters.supportOn;
     }
   },
   methods: {
@@ -261,6 +278,9 @@ export default {
     },
     handleClose() {
       this.open = false;
+    },
+    supportClose() {
+      this.$store.commit("setSupportOn", false);
     },
     openLang() {
       this.langPopup = true;
@@ -337,13 +357,13 @@ export default {
   },
   watch: {
     // https://support.google.com/analytics/answer/9234069?hl=ja
-    $route () {
+    $route() {
       // console.log('route changed', this.$route)
       analytics.setCurrentScreen(document.title);
       analytics.logEvent("page_view");
       analytics.logEvent("screen_view", {
         app_name: "web",
-        screen_name: document.title,
+        screen_name: document.title
         // app_version: version
       });
     },
@@ -372,7 +392,6 @@ export default {
     }
   },
   async created() {
-
     this.language = this.regionalSetting.defaultLanguage;
     this.languages = this.regionalSetting.languages;
     this.logo = this.regionalSetting.Logo;
@@ -389,11 +408,11 @@ export default {
     console.log("UA:" + navigator.userAgent.toLowerCase());
     if (this.$route.query.lang) {
       await this.changeLang(this.$route.query.lang);
-    } else if (navigator.userAgent.toLowerCase().indexOf('googlebot') > -1) {
+    } else if (navigator.userAgent.toLowerCase().indexOf("googlebot") > -1) {
       if (this.isJapan) {
-        await this.changeLang("ja")
+        await this.changeLang("ja");
       } else {
-        await this.changeLang("en")
+        await this.changeLang("en");
       }
     } else {
       const language =
