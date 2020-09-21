@@ -89,8 +89,14 @@
         <div class="op-button-small tertiary" @click="supportClose()">サポートを閉じる</div>
         <div
           class="bg-surface r-8 d-low m-t-8 p-b-24"
-          style="height: 550px; border: 2px solid rgba(0, 0, 0, 0.2);"
-        ></div>
+          style="height: 550px; border: 2px solid rgba(0, 0, 0, 0.2); overflow: scroll;"
+        >
+          <div
+            class="m-t-16"
+            v-for="supportMessage in this.supportMessages"
+            :key="supportMessage"
+          >{{ supportMessage }}</div>
+        </div>
         <div>画面: {{ this.supportFrom }}</div>
         <b-field label="メッセージ">
           <b-input v-model="supportInput" maxlength="200" type="textarea"></b-input>
@@ -263,9 +269,8 @@ export default {
     supportFrom() {
       return this.$store.getters.supportFrom;
     },
-    supportButtonVisible() {
-      //return !this.supportOn && this.supportFrom !== "";
-      return true;
+    supportMessages() {
+      return this.$store.getters.supportMessages;
     }
   },
   methods: {

@@ -24,7 +24,30 @@ export const state = () => ({
 	isLoading: false, // for full-page loading animation
 	isFirefoxPBM: undefined, // true, false, null
 	supportOn: false, // for support sidebar
-	supportFrom: ""
+	supportFrom: "",
+	supportMessages: [
+		"店舗: すいません、店舗の登録でちょっと分からないところがあります。",
+		"",
+		"公開にはチェックを入れた方がいいですか？",
+		"サポーター: メニューは支払い方法の登録は終わっていますか？",
+		"店舗: いいえ。",
+		"サポーター: 通常、メニューなど用意した後に公開するので今は下書きとして保存して下さい。",
+		"店舗: 保存しました。次には何をしたら良いですか？",
+		"サポーター: 支払い方法の設定が必要になります。オンラインによる事前のクレジットカード払いは考えていますか？",
+		"店舗: 支払い方法には何がありますか？",
+		"サポーター: 現地での支払いかオンラインでクレジットカードによる事前支払いですね",
+		"店舗: 現地での支払いのみで考えています。",
+		"サポーター: では、Stripeの箇所は飛ばして受け取り払いを許可を選んで下さい。",
+		"店舗: 受け取りを許可にチェックを入れました。",
+		"店舗: 次はメニューを登録すれば良いでしょうか？",
+		"サポーター: はい、お持ち帰り商品を登録しましょう。",
+		"店舗: 登録完了しました",
+		"",
+		"店舗: これで終わりですか？",
+		"サポーター: はい、最後に掲載を申請して下さい",
+		"店舗: 申請しました",
+		"サポーター: 掲載までには少々時間がかかるのでお待ち下さい。",
+	]
 });
 
 export const getters = {
@@ -61,6 +84,9 @@ export const getters = {
 	},
 	supportFrom: (state) => {
 		return state.supportFrom;
+	},
+	supportMessages: (state) => {
+		return state.supportMessages;
 	}
 };
 
