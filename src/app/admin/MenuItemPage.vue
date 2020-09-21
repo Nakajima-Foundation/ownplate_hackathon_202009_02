@@ -16,6 +16,11 @@
             <div class="level">
               <!-- Back Button and Restaurant Profile -->
               <div class="level-left flex-1"></div>
+
+              <div class="op-button-pill bg-form m-t-24" @click="supportOpen()">
+                <span class="t-button">チャットサポート</span>
+              </div>
+
               <!-- Notification Settings -->
               <div class="level-right">
                 <notification-index :shopInfo="restaurantInfo" />
@@ -647,6 +652,9 @@ export default {
         });
         console.log(error);
       }
+    },
+    supportOpen() {
+      this.$store.commit("setSupportOn", true);
     }
   }
 };

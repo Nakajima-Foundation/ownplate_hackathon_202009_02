@@ -51,6 +51,10 @@
                   }}
                 </span>
               </b-button>
+
+              <b-button class="b-reset op-button-small tertiary m-r-16" style="min-width: 128px;">
+                <span class="p-l-24 p-r-24" @click="supportOpen">チャットサポート</span>
+              </b-button>
             </div>
 
             <!-- Public Checkbox -->
@@ -1172,6 +1176,9 @@ export default {
     async updateRestaurantData(restaurantData) {
       const cleanData = this.cleanObject(restaurantData);
       await db.doc(`restaurants/${this.restaurantId()}`).update(cleanData);
+    },
+    supportOpen() {
+      this.$store.commit("setSupportOn", true);
     }
   }
 };

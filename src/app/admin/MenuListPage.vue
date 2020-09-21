@@ -28,6 +28,11 @@
                   >{{ restaurantInfo.restaurantName }}</div>
                 </div>-->
               </div>
+
+              <div class="op-button-pill bg-form m-t-24" @click="supportOpen()">
+                <span class="t-button">チャットサポート</span>
+              </div>
+
               <!-- Notification Settings -->
               <div class="level-right">
                 <notification-index :shopInfo="restaurantInfo" />
@@ -484,6 +489,9 @@ export default {
           .update("deletedFlag", true);
       }
       await this.saveMenuList(newMenuLists);
+    },
+    supportOpen() {
+      this.$store.commit("setSupportOn", true);
     }
   }
 };
