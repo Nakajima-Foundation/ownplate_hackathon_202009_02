@@ -85,12 +85,19 @@
       :right="right"
       :open.sync="this.supportOn"
     >
-      <div class="op-button-small tertiary" @click="supportClose()">サポートを閉じる</div>
-      <div>display</div>
-      <div>画面: {{ this.supportFrom }}</div>
-      <div>input</div>
+      <div class="m-l-8 m-r-8 align-center">
+        <div class="op-button-small tertiary" @click="supportClose()">サポートを閉じる</div>
+        <div
+          class="bg-surface r-8 d-low m-t-8 p-b-24"
+          style="height: 550px; border: 2px solid rgba(0, 0, 0, 0.2);"
+        ></div>
+        <div>画面: {{ this.supportFrom }}</div>
+        <b-field label="メッセージ">
+          <b-input v-model="supportInput" maxlength="200" type="textarea"></b-input>
+        </b-field>
 
-      <button>投稿</button>
+        <button>投稿</button>
+      </div>
     </b-sidebar>
 
     <!-- Main -->
@@ -187,7 +194,9 @@ export default {
 
       langPopup: false,
       isFlash: false,
-      FlashToggle: false
+      FlashToggle: false,
+
+      supportInput: ""
     };
   },
   mounted() {
