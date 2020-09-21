@@ -61,6 +61,16 @@
                     </div>
                   </a>
                 </div>
+
+                <div
+                  class="is-inline-block m-l-8 m-r-8 m-t-24"
+                  v-if="!this.supportOn"
+                  @click="supportOpen"
+                >
+                  <div class="op-button-small bg-text-white-high">
+                    <span class="c-primary t-button">チャットサポート</span>
+                  </div>
+                </div>
               </div>
               <div class="h-24 bg-ownplate-yellow is-invisible-tablet"></div>
             </div>
@@ -359,6 +369,9 @@ export default {
     },
     updateUnsetWarning(value) {
       this.unsetWarning = value;
+    },
+    supportOpen() {
+      this.$store.commit("setSupportOn", true);
     }
   },
   destroyed() {
@@ -380,6 +393,9 @@ export default {
         return true;
       }
       return false;
+    },
+    supportOn() {
+      return this.$store.getters.supportOn;
     }
   }
 };

@@ -23,8 +23,8 @@ export const state = () => ({
 	dialog: null, // for DialogBox
 	isLoading: false, // for full-page loading animation
 	isFirefoxPBM: undefined, // true, false, null
-	supportOn: true, // for support sidebar
-	supportFrom: "test"
+	supportOn: false, // for support sidebar
+	supportFrom: ""
 });
 
 export const getters = {

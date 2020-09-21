@@ -262,6 +262,10 @@ export default {
     },
     supportFrom() {
       return this.$store.getters.supportFrom;
+    },
+    supportButtonVisible() {
+      //return !this.supportOn && this.supportFrom !== "";
+      return true;
     }
   },
   methods: {
