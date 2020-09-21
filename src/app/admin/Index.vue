@@ -259,6 +259,7 @@ export default {
   },
   created() {
     this.checkAdminPermission();
+    this.$store.commit("setSupportFrom", "管理店舗登録");
   },
   async mounted() {
     try {
@@ -365,6 +366,7 @@ export default {
     if (this.restaurant_detacher) {
       this.restaurant_detacher();
     }
+    this.$store.commit("setSupportFrom", "");
   },
   computed: {
     uid() {

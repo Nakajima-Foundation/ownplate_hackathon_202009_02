@@ -23,7 +23,8 @@ export const state = () => ({
 	dialog: null, // for DialogBox
 	isLoading: false, // for full-page loading animation
 	isFirefoxPBM: undefined, // true, false, null
-	supportOn: true // for support sidebar
+	supportOn: true, // for support sidebar
+	supportFrom: "test"
 });
 
 export const getters = {
@@ -57,6 +58,9 @@ export const getters = {
 	},
 	supportOn: (state) => {
 		return state.supportOn;
+	},
+	supportFrom: (state) => {
+		return state.supportFrom;
 	}
 };
 
@@ -128,6 +132,10 @@ export const mutations = {
 	},
 	setSupportOn(state, flag) {
 		state.supportOn = flag;
+	},
+	setSupportFrom(state, pageName) {
+		// todo: 多言語対応
+		state.supportFrom = pageName;
 	}
 };
 

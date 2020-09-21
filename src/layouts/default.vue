@@ -87,7 +87,9 @@
     >
       <div class="op-button-small tertiary" @click="supportClose()">サポートを閉じる</div>
       <div>display</div>
+      <div>画面: {{ this.supportFrom }}</div>
       <div>input</div>
+
       <button>投稿</button>
     </b-sidebar>
 
@@ -248,6 +250,9 @@ export default {
     },
     supportOn() {
       return this.$store.getters.supportOn;
+    },
+    supportFrom() {
+      return this.$store.getters.supportFrom;
     }
   },
   methods: {

@@ -80,9 +80,11 @@ export default {
           }
         }
       );
+    this.$store.commit("setSupportFrom", "管理店舗情報変更");
   },
   destroyed() {
     this.notification_detacher && this.notification_detacher();
+    this.$store.commit("setSupportFrom", "");
   },
   methods: {
     closeNotificationSettings() {

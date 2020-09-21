@@ -30,7 +30,7 @@
               </div>
               <!-- Notification Settings -->
               <div class="level-right">
-                <notification-index :shopInfo="restaurantInfo"/>
+                <notification-index :shopInfo="restaurantInfo" />
               </div>
             </div>
           </div>
@@ -312,6 +312,7 @@ export default {
         this.titleCollection = results.empty ? {} : results;
       });
     this.detacher = [restaurant_detacher, menu_detacher, title_detacher];
+    this.$store.commit("setSupportFrom", "メニュー登録");
   },
   destroyed() {
     if (this.detachers) {
@@ -319,6 +320,7 @@ export default {
         detacher();
       });
     }
+    this.$store.commit("setSupportFrom", "");
   },
   methods: {
     async updateTitle(title) {

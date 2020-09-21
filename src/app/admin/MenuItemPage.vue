@@ -515,6 +515,11 @@ export default {
     }
     this.menuInfo = Object.assign({}, this.menuInfo, resMenuInfo.data());
     this.notFound = false;
+
+    this.$store.commit("setSupportFrom", "メニュー編集");
+  },
+  async destroyed() {
+    this.$store.commit("setSupportFrom", "");
   },
   computed: {
     categories1() {
