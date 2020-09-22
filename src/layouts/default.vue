@@ -90,7 +90,7 @@
       :fullheight="fullheight"
       :fullwidth="fullwidth"
       :right="right"
-      :open.sync="this.supportOn"
+      :open.sync="supportOn"
       :can-cancel="[]"
     >
       <div class="m-l-8 m-r-8 align-center">
