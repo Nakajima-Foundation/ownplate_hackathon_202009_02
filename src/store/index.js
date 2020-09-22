@@ -37,7 +37,7 @@ const dummyMessages = [
   },
   {
     role: "supporter",
-    message: "メニューは支払い方法の登録は終わっていますか？"
+    message: "メニューと支払い方法の登録は終わっていますか？"
   },
   {
     role: "shop",

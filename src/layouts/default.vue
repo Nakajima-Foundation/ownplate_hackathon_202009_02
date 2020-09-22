@@ -91,6 +91,7 @@
       :fullwidth="fullwidth"
       :right="right"
       :open.sync="this.supportOn"
+      :can-cancel="[]"
     >
       <div class="m-l-8 m-r-8 align-center">
         <div class="op-button-small tertiary" @click="supportClose()">
